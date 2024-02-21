@@ -7,26 +7,28 @@ use Alura\Leilao\Service\Avaliador;
 
 require 'vendor/autoload.php';
 
-//Prepara
+// Arrange - Given
 $leilao = new Leilao('Fiat 147 0KM');
 
-$wellyson = new Usuario('Wellyson');
-$rayane = new Usuario('Rayane');
+$maria = new Usuario('Maria');
+$joao = new Usuario('João');
 
-$leilao->recebeLance(new Lance($wellyson, 2000));
-$leilao->recebeLance(new Lance($rayane, 2500));
+$leilao->recebeLance(new Lance($joao, 2000));
+$leilao->recebeLance(new Lance($maria, 2500));
 
-// Executa
 $leiloeiro = new Avaliador();
+
+// Act - When
 $leiloeiro->avalia($leilao);
 
 $maiorValor = $leiloeiro->getMaiorValor();
 
-// Verifica
+// Assert - Then
 $valorEsperado = 2500;
 
-if ($maiorValor == $valorEsperado){
-    echo "Teste OK.";
+if ($valorEsperado == $maiorValor) {
+    echo "TESTE OK";
 } else {
-    echo 'Teste falhou';
+    echo "TESTE FALHOU";
 }
+
